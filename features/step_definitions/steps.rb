@@ -1,25 +1,3 @@
-require 'nice_bank'
-
-module KnowsTheDomain
-  def my_account
-    @my_account||= Account.new
-  end
-  
-  def cash_slot
-    @cash_slot ||= CashSlot.new
-  end
-
-  def teller
-  @teller ||= Teller.new(cash_slot) 
-  end
-end
-
-World(KnowsTheDomain)
-
-CAPTURE_CASH_AMOUNT = Transform(/^\$(\d+)$/) do |number|
-  number.to_i
-end
-
 Given(/^I have deposited (#{CAPTURE_CASH_AMOUNT}) in my account$/) do |amount|
   # puts self
   my_account.deposit(amount)
